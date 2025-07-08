@@ -41,6 +41,14 @@ impl Input {
 			self.r#move(0);
 		}
 
+		// Trigger initial completion
+		if opt.cfg.completion
+			&& let Some(cb) = &self.callback
+		{
+			let (before, after) = self.partition();
+			cb(before, after);
+		}
+
 		render!();
 	}
 }
